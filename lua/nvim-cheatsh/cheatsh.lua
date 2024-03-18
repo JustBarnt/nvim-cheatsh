@@ -13,6 +13,21 @@ function M.fetch_cheatsheet(query, silent, callback)
   if not silent then
     vim.notify("Fetching cheatsheet for " .. query, vim.log.levels.INFO, { title = "Cheatsh" })
   end
+
+  vim.print(vim.inspect({ "curl", "-s", url, query }))
+
+  vim.system({
+    "curl",
+    "-s",
+    url,
+    query,
+  }, {
+    stdout = function(_, lines)
+      vim.print(vim.inspect(lines))
+    end,
+    text = true,
+  })
+
   vim.fn.jobstart(cmd, {
     on_stdout = function(_, lines)
       if not lines or #lines == 0 then
@@ -23,6 +38,7 @@ function M.fetch_cheatsheet(query, silent, callback)
         return
       end
       local success, result = pcall(function()
+        vim.print(vim.inspect(lines))
         for i, line in ipairs(lines) do
           lines[i] = strip_ansi(line)
         end
@@ -42,7 +58,6 @@ function M.fetch_list(callback)
   url = url .. ":list"
 
   local cmd = "curl -s '" .. url .. "'"
-  vim.notify(cmd)
   vim.fn.jobstart(cmd, {
     on_stdout = function(_, data)
       if not data then
