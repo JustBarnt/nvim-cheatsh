@@ -72,7 +72,7 @@ local function cheat_previewer()
   return previewers.new_buffer_previewer({
     define_preview = function(self, entry)
       local ft_query = get_ft_query(entry.value)
-      cheatsh.fetch_cheatsheet(ft_query.query, false, function(lines)
+      cheatsh.fetch_cheatsheet(ft_query.query, true, function(lines)
         if not self.state.bufnr or not vim.api.nvim_buf_is_valid(self.state.bufnr) then
           return
         end
@@ -109,7 +109,7 @@ function Cheat.list()
           end,
         }),
         sorter = conf.generic_sorter(opts),
-        previewer = cheat_previewer(),
+        -- previewer = cheat_previewer(),
         attach_mappings = function(prompt_bufnr, _)
           actions.select_default:replace(function()
             local selection = action_state.get_selected_entry()
