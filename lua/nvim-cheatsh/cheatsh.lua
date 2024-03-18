@@ -42,6 +42,7 @@ function M.fetch_list(callback)
   url = url .. ":list"
 
   local cmd = "curl -s '" .. url .. "'"
+  vim.notify(cmd)
   vim.fn.jobstart(cmd, {
     on_stdout = function(_, data)
       if not data then
