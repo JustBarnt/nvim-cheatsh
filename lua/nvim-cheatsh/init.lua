@@ -72,7 +72,7 @@ local function cheat_previewer()
   return previewers.new_buffer_previewer({
     define_preview = function(self, entry)
       local ft_query = get_ft_query(entry.value)
-      cheatsh.fetch_cheatsheet(ft_query.query, true, function(lines)
+      cheatsh.fetch_cheatsheet(ft_query.query, false, function(lines)
         if not self.state.bufnr or not vim.api.nvim_buf_is_valid(self.state.bufnr) then
           return
         end

@@ -9,6 +9,7 @@ end
 function M.fetch_cheatsheet(query, silent, callback)
   local url = config.options.cheatsh_url
   local cmd = "curl -s '" .. url .. query .. "'"
+  vim.notify(cmd)
   if not silent then
     vim.notify("Fetching cheatsheet for " .. query, vim.log.levels.INFO, { title = "Cheatsh" })
   end
