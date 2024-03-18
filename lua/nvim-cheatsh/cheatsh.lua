@@ -38,6 +38,7 @@ function M.fetch_cheatsheet(query, silent, callback)
         return
       end
       local success, result = pcall(function()
+        vim.print(vim.inspect(type(lines)))
         vim.print(vim.inspect(lines))
         for i, line in ipairs(lines) do
           lines[i] = strip_ansi(line)
