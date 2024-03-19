@@ -109,7 +109,7 @@ function Cheat.list()
           end,
         }),
         sorter = conf.generic_sorter(opts),
-        -- previewer = cheat_previewer(),
+        previewer = cheat_previewer(),
         attach_mappings = function(prompt_bufnr, _)
           actions.select_default:replace(function()
             local selection = action_state.get_selected_entry()
